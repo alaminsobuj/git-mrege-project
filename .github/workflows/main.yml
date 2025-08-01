@@ -13,25 +13,11 @@ jobs:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v2
 
-      - name: 🧪 Create dummy .env to avoid DB connection errors during install
-        run: |
-          echo "APP_KEY=base64:DUMMYKEY1234567890=" > .env
-          echo "APP_ENV=production" >> .env
-          echo "APP_DEBUG=false" >> .env
-          echo "DB_CONNECTION=sqlite" >> .env
-          echo "DB_DATABASE=:memory:" >> .env
-
       - name: 🧰 Install PHP and Composer
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           tools: composer
-
-      - name: 📦 Install PHP dependencies without running scripts
-        run: composer install --no-dev --optimize-autoloader --no-scripts
-
-      - name: 🧼 Remove dummy .env file
-        run: rm .env
 
       # Note: Running Laravel artisan commands like package:discover or migrations
       # should be done manually on the server after deployment
