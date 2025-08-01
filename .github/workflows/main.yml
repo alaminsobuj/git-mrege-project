@@ -32,5 +32,5 @@ jobs:
           #server-dir: public_html/alaminsobuj.net/solveissue/
           #server-dir: solveissue/
           #local-dir: ./
-          #server-dir: solveissue/
-          server-dir: /home/alaminso/public_html/solveissue
+          server-dir: solveissue/
+          #server-dir: /home/alaminso/public_html/solveissue
