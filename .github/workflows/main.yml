@@ -30,5 +30,6 @@ jobs:
           password: ${{ secrets.PASSWORD}}   # Set this secret in your GitHub repo
           #server-dir: /home/alaminso/public_html/alaminsobuj.net/solveissue/        # Your FTP root directory on cPanel
           #server-dir: public_html/alaminsobuj.net/solveissue/
+          #server-dir: solveissue/
+          #local-dir: ./
           server-dir: solveissue/
-          local-dir: ./
