@@ -1,36 +1,31 @@
-name: 🚀 Deploy Laravel 12 to cPanel via FTPfff
-
+name: Publish Website to CPanel
 on:
   push:
     branches:
       - main
-
 jobs:
-  deploy:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
     runs-on: ubuntu-latest
-
     steps:
-      - name: ⬇️ Checkout code
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2 
+    - name: Build assets
+      run: npm install && npm run build
 
-      - name: 🧰 Install PHP and Composer
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          tools: composer
+    - name: Install PHP and Composer
+      uses: shivammathur/setup-php@v2
+      with:
+          php-version: '8.2' # Adjust to match the PHP version used by your Laravel project
+          tools: 'composer'
 
-      # Note: Running Laravel artisan commands like package:discover or migrations
-      # should be done manually on the server after deployment
-
-      - name: 📂 Deploy files to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
-        with:
-          server: ${{ secrets.SERVER }}       # Set this secret in your GitHub repo
-          username: ${{ secrets.USERNAME}}   # Set this secret in your GitHub repo
-          password: ${{ secrets.PASSWORD}}   # Set this secret in your GitHub repo
-          server-dir: /home/alaminso/public_html/alaminsobuj.net/solveissue/        # Your FTP root directory on cPanel
-          #server-dir: public_html/alaminsobuj.net/solveissue/
-          #server-dir: solveissue/
-          #local-dir: ./
-          #server-dir: solveissue/
-          #server-dir: /home/alaminso/public_html/solveissue
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader
+        
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.SERVER }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
