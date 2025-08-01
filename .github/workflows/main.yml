@@ -1,4 +1,4 @@
-name: 🚀 Deploy Laravel 12 to cPanel via FTP
+name: 🚀 Deploy Laravel 12 to cPanel via FTPfff
 
 on:
   push:
