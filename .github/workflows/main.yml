@@ -33,4 +33,4 @@ jobs:
           #server-dir: solveissue/
           #local-dir: ./
           #server-dir: solveissue/
-          server-dir: public_html/solveissue
+          server-dir: public_html/solveissue/
